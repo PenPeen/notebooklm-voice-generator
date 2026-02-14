@@ -223,8 +223,12 @@ async function automateNotebookLM(url) {
 
     await clickElement(generateBtn);
 
-    log('Automation complete');
+    log('Automation complete. Closing tab in 1s...');
     chrome.runtime.sendMessage({ action: 'statusUpdate', status: '完了: 音声生成を開始しました', type: 'success' });
+
+    // 1秒待機してからタブを閉じる
+    await sleep(1000);
+    window.close();
 
   } catch (error) {
     console.error('Automation failed:', error);
