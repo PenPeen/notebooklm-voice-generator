@@ -7,7 +7,9 @@ const NOTEBOOKLM_URL = 'https://notebooklm.google.com/?authuser=1';
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'startAutomation') {
     handleAutomation(request.url);
-    sendResponse({ status: 'started' }); // 非同期応答のため
+    sendResponse({ status: 'started' });
+  } else if (request.action === 'closeTab' && sender.tab) {
+    chrome.tabs.remove(sender.tab.id);
   }
   return true;
 });

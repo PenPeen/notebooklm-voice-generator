@@ -228,7 +228,7 @@ async function automateNotebookLM(url) {
 
     // 1秒待機してからタブを閉じる
     await sleep(1000);
-    window.close();
+    chrome.runtime.sendMessage({ action: 'closeTab' });
 
   } catch (error) {
     console.error('Automation failed:', error);
