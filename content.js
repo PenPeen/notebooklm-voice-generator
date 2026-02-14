@@ -61,7 +61,7 @@ async function waitForElementByText(tagName, text, timeout = 10000) {
       for (const el of elements) {
         if (!isVisible(el)) continue; // 可視チェック
 
-        if ((el.textContent && el.textContent.includes(text)) || 
+        if ((el.textContent && el.textContent.includes(text)) ||
             (el.ariaLabel && el.ariaLabel.includes(text)) ||
             (el.getAttribute('aria-label') && el.getAttribute('aria-label').includes(text))) {
           return el;
@@ -112,14 +112,14 @@ async function inputText(element, text) {
 
 async function automateNotebookLM(url) {
   log('Starting automation with URL:', url);
-  
+
   try {
     // Step 1: 新規作成 (Create New Notebook)
     // 既にモーダルが開いている(URLパラメータ等)場合も考慮し、
     // まず入力欄があるか確認し、なければ新規作成を押すフローにするのが堅牢。
-    
+
     let urlInput = null;
-    
+
     // Step 2 先行チェック: すでにモーダル(入力欄)が開いているか？
     try {
         log('Checking if source input is already visible...');
@@ -141,7 +141,7 @@ async function automateNotebookLM(url) {
         urlInput = await waitForElement('textarea[formcontrolname="discoverSourcesQuery"]', 5000)
            .catch(() => waitForElement('textarea', 5000));
     }
-    
+
     await inputText(urlInput, url);
     await sleep(1000);
 
@@ -154,8 +154,8 @@ async function automateNotebookLM(url) {
     await clickElement(nextBtn);
 
     // Step 4: 待機 & 音声解説カスタマイズ (Customize Audio)
-    log('Step 4: Waiting for processing (15s)...');
-    await sleep(15000); // ソース読み込み待機
+    log('Step 4: Waiting for processing (5s)...');
+    await sleep(5000); // ソース読み込み待機
 
     log('Step 4.5: Clicking Customize Audio...');
     // ターゲット: button[aria-label="音声解説をカスタマイズ"] (edit アイコン)
@@ -186,11 +186,11 @@ async function automateNotebookLM(url) {
        if (!currentValue || !currentValue.textContent.includes('日本語')) {
            log('Language is not Japanese, changing...');
            await clickElement(languageSelect);
-           await sleep(1000); 
+           await sleep(1000);
            const japaneseOption = await waitForElementByText('mat-option', '日本語', 5000);
            await clickElement(japaneseOption);
            log('Selected: Japanese');
-           await sleep(1000); 
+           await sleep(1000);
        }
     } catch (e) { log('Could not set Language:', e); }
 
@@ -209,8 +209,8 @@ async function automateNotebookLM(url) {
     try {
         const focusInput = await waitForElement('textarea[aria-label="このエピソードで AI ホストが焦点を当てるべきこと"]', 5000)
           .catch(() => waitForElement('textarea[placeholder*="次の方法をお試しください"]', 5000));
-        
-        await inputText(focusInput, '日本語、短め、AIホストが焦点を当てるべきことに、サイトを要約して');
+
+        await inputText(focusInput, 'サイトの要点・結論・重要なデータを分かりやすく要約して');
         log('Input Focus instruction');
         await sleep(1000);
     } catch (e) { log('Could not input focus instruction:', e); }

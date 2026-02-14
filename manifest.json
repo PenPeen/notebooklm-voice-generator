@@ -31,8 +31,8 @@
   "commands": {
     "start-automation": {
       "suggested_key": {
-        "default": "Ctrl+Shift+U",
-        "mac": "Command+Shift+U"
+        "default": "Ctrl+Shift+N",
+        "mac": "Command+Shift+N"
       },
       "description": "クリップボードのURLでNotebookLM自動生成を開始"
     }
