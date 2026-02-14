@@ -27,8 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error('有効なURLではありません: ' + text.substring(0, 50) + '...');
       }
 
-      statusDiv.textContent = '処理を開始します...
-URL: ' + url.href;
+      statusDiv.textContent = '処理を開始します...\nURL: ' + url.href;
 
       // バックグラウンドにメッセージ送信
       chrome.runtime.sendMessage({
