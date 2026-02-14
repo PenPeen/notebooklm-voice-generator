@@ -1,5 +1,5 @@
 // --- Configuration ---
-const NOTEBOOKLM_URL = 'https://notebooklm.google.com/';
+const NOTEBOOKLM_URL = 'https://notebooklm.google.com/?authuser=1';
 
 // --- Event Listeners ---
 
