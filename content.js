@@ -210,7 +210,7 @@ async function automateNotebookLM(url) {
         const focusInput = await waitForElement('textarea[aria-label="このエピソードで AI ホストが焦点を当てるべきこと"]', 5000)
           .catch(() => waitForElement('textarea[placeholder*="次の方法をお試しください"]', 5000));
 
-        await inputText(focusInput, 'サイトの要点・結論・重要なデータを分かりやすく要約して');
+        await inputText(focusInput, 'リスナーはWEBエンジニアです。その前提で、サイトの要点・結論・重要なデータを分かりやすく要約して。技術的な用語はそのまま使い、実務に役立つポイントを重視してください。冒頭のアイスブレイクや雑談は省略し、最初から本題に入ってください。最後にリスナーへの問いかけは不要です。');
         log('Input Focus instruction');
         await sleep(1000);
     } catch (e) { log('Could not input focus instruction:', e); }
